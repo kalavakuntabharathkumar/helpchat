@@ -1,0 +1,251 @@
+[
+  {
+    "id": 1,
+    "question": "How long do approved refunds normally take?",
+    "expectedTopic": "refund",
+    "mustMention": [
+      "5\u20137",
+      "business days"
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Can I get a refund for a digital item?",
+    "expectedTopic": "refund",
+    "mustMention": [
+      "eligibility"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "I was charged twice. What should I do?",
+    "expectedTopic": "payment",
+    "mustMention": [
+      "duplicate",
+      "review"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "My payment is still pending. Should I retry?",
+    "expectedTopic": "payment",
+    "mustMention": [
+      "pending"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Where can I find my delivery estimate?",
+    "expectedTopic": "shipping",
+    "mustMention": [
+      "checkout"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "My delivery is delayed. What should support check?",
+    "expectedTopic": "shipping",
+    "mustMention": [
+      "order status"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Can I cancel a pending order?",
+    "expectedTopic": "cancel",
+    "mustMention": [
+      "pending"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Can I cancel after fulfillment starts?",
+    "expectedTopic": "cancel",
+    "mustMention": [
+      "staff",
+      "review"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "I forgot my password. What should I do?",
+    "expectedTopic": "account",
+    "mustMention": [
+      "reset"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Can support tell me my password?",
+    "expectedTopic": "account",
+    "mustMention": [
+      "password"
+    ]
+  },
+  {
+    "id": 11,
+    "question": "Should I send my API key to support?",
+    "expectedTopic": "account",
+    "mustMention": [
+      "API key"
+    ]
+  },
+  {
+    "id": 12,
+    "question": "The site shows an error. What information should I provide?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "browser",
+      "error"
+    ]
+  },
+  {
+    "id": 13,
+    "question": "My browser is acting strangely. What details help?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "browser",
+      "device"
+    ]
+  },
+  {
+    "id": 14,
+    "question": "What should I provide for a bug report?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "steps",
+      "reproduce"
+    ]
+  },
+  {
+    "id": 15,
+    "question": "How quickly are refunds processed?",
+    "expectedTopic": "refund",
+    "mustMention": [
+      "5\u20137"
+    ]
+  },
+  {
+    "id": 16,
+    "question": "I want my money back. What is the first step?",
+    "expectedTopic": "refund",
+    "mustMention": [
+      "approval"
+    ]
+  },
+  {
+    "id": 17,
+    "question": "My card appears to have been charged twice.",
+    "expectedTopic": "payment",
+    "mustMention": [
+      "duplicate"
+    ]
+  },
+  {
+    "id": 18,
+    "question": "A payment says pending.",
+    "expectedTopic": "payment",
+    "mustMention": [
+      "payment status"
+    ]
+  },
+  {
+    "id": 19,
+    "question": "When should I expect delivery?",
+    "expectedTopic": "shipping",
+    "mustMention": [
+      "checkout"
+    ]
+  },
+  {
+    "id": 20,
+    "question": "Tracking looks delayed.",
+    "expectedTopic": "shipping",
+    "mustMention": [
+      "order status"
+    ]
+  },
+  {
+    "id": 21,
+    "question": "I need to stop my order while it is pending.",
+    "expectedTopic": "cancel",
+    "mustMention": [
+      "cancellation"
+    ]
+  },
+  {
+    "id": 22,
+    "question": "My order is already being fulfilled. Can I cancel it?",
+    "expectedTopic": "cancel",
+    "mustMention": [
+      "review"
+    ]
+  },
+  {
+    "id": 23,
+    "question": "I cannot log into my account.",
+    "expectedTopic": "account",
+    "mustMention": [
+      "password"
+    ]
+  },
+  {
+    "id": 24,
+    "question": "Can you take my password to fix the account?",
+    "expectedTopic": "account",
+    "mustMention": [
+      "never",
+      "password"
+    ]
+  },
+  {
+    "id": 25,
+    "question": "Can I share an API key to help debugging?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "never",
+      "API keys"
+    ]
+  },
+  {
+    "id": 26,
+    "question": "What safe details help diagnose a technical problem?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "timestamp",
+      "error"
+    ]
+  },
+  {
+    "id": 27,
+    "question": "Why should I include reproduction steps?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "reproduce"
+    ]
+  },
+  {
+    "id": 28,
+    "question": "Is every refund automatic?",
+    "expectedTopic": "refund",
+    "mustMention": [
+      "eligibility"
+    ]
+  },
+  {
+    "id": 29,
+    "question": "Should I retry a pending payment immediately?",
+    "expectedTopic": "payment",
+    "mustMention": [
+      "verify"
+    ]
+  },
+  {
+    "id": 30,
+    "question": "What should support avoid asking for?",
+    "expectedTopic": "technical",
+    "mustMention": [
+      "secrets"
+    ]
+  }
+]
