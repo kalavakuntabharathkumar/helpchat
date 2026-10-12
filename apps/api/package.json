@@ -1,1 +1,0 @@
-{"scripts":{"dev":"tsx watch src/server.ts","start":"tsx src/server.ts","eval":"tsx src/evaluate.ts"},"dependencies":{"@langfuse/tracing":"^3.37.4","@supabase/supabase-js":"^2.57.0","cors":"^2.8.5","dotenv":"^17.2.2","express":"^5.1.0","openai":"^5.19.1"},"devDependencies":{"@types/cors":"^2.8.19","@types/express":"^5.0.3","tsx":"^4.20.5","typescript":"^5.9.2"}}

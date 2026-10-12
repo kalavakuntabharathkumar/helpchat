@@ -1,68 +1,87 @@
-# AI-Assisted Support Chat with Evaluation & Tracing
+# helpchat - AI-assisted support chat with evaluation & tracing
 
-A portfolio/demo customer-support chat application showing:
-- React frontend
-- TypeScript/Node.js backend
-- OpenAI or Anthropic-compatible LLM adapter
-- Context retrieval from a small support knowledge base
-- Streaming responses
-- Langfuse tracing hooks
-- Prompt evaluation runner over a 30-question dataset
-- Supabase persistence
+TypeScript, Node.js (Express), React (Vite), LLM APIs through the OpenAI SDK (OpenAI-compatible: OpenRouter primary, Groq fallback), Langfuse, Supabase (Postgres + pgvector), local embeddings (Transformers.js).
 
-## Setup
+The chatbot answers questions about a fictional company ("Acme Cloud") using two synthetic PDF manuals in `docs/` as its knowledge base.
 
-```bash
-cd apps/api
-npm install
-cp .env.example .env
-npm run dev
-```
+## How it works
 
-```bash
-cd apps/web
-npm install
-npm run dev
-```
+- `web/src/App.tsx` React chat page. It sends each message to the server and shows the reply as it streams in. It always uses prompt v2. The reply is shown as plain text, so if the model returns markdown symbols (for example `**`), they appear as typed.
+- `server/index.ts` Express server on port 3001 with a status page at `GET /` and the chat endpoint `POST /chat`. For each message the chat endpoint:
+  1. Validates the input: `sessionId` and `message` are required, the message can be at most 2000 characters, and `promptVersion` must be `v1` or `v2` (default `v2`).
+  2. Answers small talk by rules (greetings, thanks, goodbye, "ok"). These messages skip retrieval and the LLM. They are still traced in Langfuse and saved in Supabase.
+  3. Embeds the question locally and retrieves the 4 closest knowledge-base chunks from Supabase (pgvector cosine search through the `match_kb` SQL function).
+  4. Loads all saved messages of the session from Supabase as chat history, and builds the prompt (v1 or v2) with the retrieved chunks as context.
+  5. Streams the LLM reply to the browser as it is generated (`max_tokens` 600).
+  6. Saves the turn (user message and answer) to Supabase and traces it in Langfuse.
+- LLM providers: OpenRouter is tried first (model from `MODEL`). If it fails or returns nothing, the same request goes to Groq. The Groq model is detected automatically from what the key can use (order of preference: `GROQ_MODEL`, `openai/gpt-oss-20b`, `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `openai/gpt-oss-120b`). A provider that hits a daily limit is skipped for 30 minutes, and one with a rejected key or missing model for 10 minutes. On a per-minute rate limit of the last provider, the server waits and retries. If a reply has already started streaming and then breaks, it is not restarted. If every provider fails, the user sees "Sorry, something went wrong" with the error.
+- Optional: `LLM_BASE_URL` and `LLM_API_KEY` in `.env` replace the OpenRouter address and key, so any OpenAI-compatible service can be the primary provider.
+- `scripts/ingest.ts` reads `docs/acme-1.pdf` and `docs/acme-2.pdf`, removes page headers and page numbers, skips the table of contents, splits the text by numbered section (about 143 chunks), embeds each chunk locally (all-MiniLM-L6-v2, 384 dimensions) and stores them in `kb_articles`. Running it again deletes the old chunks first.
+- `eval/run.ts` runs the evaluation (see below).
 
-Set `LLM_PROVIDER=openai` or `LLM_PROVIDER=anthropic`.
+## Langfuse tracing
 
-For OpenAI:
-- `OPENAI_API_KEY`
-- `OPENAI_MODEL` (default: gpt-4.1-mini)
-
-For Anthropic:
-- `ANTHROPIC_API_KEY`
-- `ANTHROPIC_MODEL` (default: claude-3-5-haiku-latest)
-
-Optional Langfuse:
-- `LANGFUSE_PUBLIC_KEY`
-- `LANGFUSE_SECRET_KEY`
-- `LANGFUSE_BASE_URL`
-
-Optional Supabase:
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
+- One trace per chat turn, named `support-chat`, grouped by `sessionId`, with the prompt version in its metadata.
+- Each LLM turn has an `llm-reply` generation containing the full prompt (system prompt with the retrieved context, history, question), the answer, the model and the provider used. If every provider fails, the generation is marked `ERROR` with the error message.
+- Small-talk turns are traced too (provider `rule`, no generation).
+- The response headers `x-trace-id` and `x-provider` identify the trace and the provider of each reply.
+- The eval run adds a `correct` score (1 or 0, with the failure type as the comment) to every graded trace, and an `api_error` score to traces that failed.
 
 ## Evaluation
 
-Run:
+`npm run eval` talks to the running server and:
 
-```bash
-cd apps/api
-npm run eval
+1. Reads `eval/questions.json`: 36 entries, made of 24 in-scope questions, 6 out-of-scope questions and 6 small-talk messages.
+2. Asks every entry with prompt v1 and then with prompt v2, each in its own new session.
+3. Grades each answer automatically:
+   - In-scope: the answer must contain the expected keyword(s) from the question file.
+   - Out-of-scope: the answer must contain a refusal phrase such as "I don't have that information".
+   - Small talk: the answer must not be a refusal and must contain an expected greeting/thanks/goodbye word.
+   This is keyword matching, not human or LLM judging, so it can accept a wrong answer that happens to contain the keyword and reject a correct answer that is worded differently.
+4. Checks the quality of every answer, correct or not: more than 70 words ("overly_long_answer") and markdown symbols in a plain-text chat ("markdown_in_plain_text_chat").
+5. Sends 50 more scripted questions (the same questions, repeated, with prompt v2) so that Langfuse holds 100+ traced sessions. Every session is a single question and answer generated by the script, not a real user and not a multi-turn conversation.
+6. Writes `RESULTS.md` (accuracy per prompt for in-scope, out-of-scope and small talk, the overall figure, and the top 3 quality issues) and `eval/failures.json` (every flagged answer, shortened).
+
+Notes:
+- Small talk is answered by rules before the LLM, so it scores the same for both prompts. It is included in the "Overall" figure, so the prompt difference is clearest in the in-scope and out-of-scope columns.
+- API errors are not counted as wrong answers; they are reported in their own column.
+- Calls are paced and retried up to 3 times to stay within free-tier rate limits, so a full run takes several minutes. Retries also count as sessions in Langfuse.
+- The model is a free-tier model whose answers vary from run to run, so the exact percentages change a little each time.
+- The quality flags (too long, markdown) are stored in `RESULTS.md` and `eval/failures.json`, not as Langfuse scores.
+
+## Setup
+
+1. Supabase: create a project and run `supabase/schema.sql` in the SQL editor. It creates the vector extension, the tables `kb_articles`, `sessions` and `messages`, the `match_kb` search function and a vector index. Row Level Security is disabled on the three tables.
+2. Langfuse: create a project at cloud.langfuse.com and copy its keys.
+3. Create a `.env` file in the project folder:
 ```
+   OPENROUTER_API_KEY=
+   MODEL=openrouter/free
+   GROQ_API_KEY=
+   GROQ_MODEL=openai/gpt-oss-20b
+   SUPABASE_URL=
+   SUPABASE_KEY=
+   LANGFUSE_PUBLIC_KEY=
+   LANGFUSE_SECRET_KEY=
+   LANGFUSE_HOST=https://cloud.langfuse.com
+```
+   `SUPABASE_KEY` is the service_role key. It must stay on the server. Never commit `.env` (add it to `.gitignore`). `GROQ_API_KEY` and `GROQ_MODEL` are optional: without a Groq key there is no fallback provider.
+4. `npm install` (Node 18 or newer).
+5. `npm run ingest` loads the PDFs into the knowledge base. It is safe to re-run. The first run downloads the embedding model and caches it.
 
-The evaluator loads `eval/questions.json`, calls the selected model for each question,
-and writes results to `eval/results.json`. The included dataset contains 30 questions
-covering billing, orders, accounts, returns, and technical support.
+## Run
 
-## Tracing
+- `npm run server`, then in a second terminal `npm run web`, and open the printed URL (normally http://localhost:5173).
+- With the server running: `npm run eval`. It overwrites `RESULTS.md` and `eval/failures.json`.
 
-`src/tracing.ts` creates a Langfuse trace when credentials are available. The implementation
-is intentionally optional so the application still runs without external tracing credentials.
+## Results
 
-## Important
+The evaluation numbers are generated by `npm run eval`, not written by hand. `RESULTS.md` does not exist until the eval has been run. See it and the Langfuse project for the results and the traced sessions. After changing a prompt, the knowledge base or the questions, run the eval again.
 
-No real customer data or credentials are included. The sample knowledge base and evaluation
-questions are synthetic demo content.
+## Known limitations
+
+- Retrieval is vector search only. It has no re-ranking and no minimum-similarity cut-off, and it uses only the current message, so short follow-up questions may retrieve poorly.
+- The whole session history is sent to the model with every message, with no limit.
+- The `/chat` endpoint has no login and no rate limit, and CORS is open. It is meant for local demos, not public hosting.
+- The scripts run through `tsx`, which does not type-check. Running `tsc` directly reports 2 missing-type errors in `scripts/ingest.ts`.
+- The knowledge base is two synthetic PDFs, so the results say nothing about accuracy on real documents.
