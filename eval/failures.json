@@ -1,0 +1,350 @@
+[
+  {
+    "v": "v1",
+    "q": "How long is an account locked after repeated failed logins?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "An account is locked for **30 minutes** after repeated authentication failures.  \nDuring that period, avoid attempting to log in again, as each new attempt can extend the lock. If the lock persists beyond the expected time or you’re unsure whether it"
+  },
+  {
+    "v": "v1",
+    "q": "What is the default limit for API requests per minute?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The default limit for API requests is **1,000 requests per minute**."
+  },
+  {
+    "v": "v1",
+    "q": "What is the maximum size of a single object in object storage?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The maximum size for a single object in Acme Cloud Object Storage is **5 TB** (terabytes)."
+  },
+  {
+    "v": "v1",
+    "q": "What does error code AUTH-403 mean?",
+    "issue": "overly_long_answer",
+    "answer": "**AUTH‑403**  \n*HTTP Status 403 – “Forbidden”*  \n\n- The user’s authentication (login, API key, token, etc.) was accepted.  \n- The request was rejected because the user **does not have the required IAM role/permissions** to perform the requested opera"
+  },
+  {
+    "v": "v1",
+    "q": "What does error code AUTH-403 mean?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "**AUTH‑403**  \n*HTTP Status 403 – “Forbidden”*  \n\n- The user’s authentication (login, API key, token, etc.) was accepted.  \n- The request was rejected because the user **does not have the required IAM role/permissions** to perform the requested opera"
+  },
+  {
+    "v": "v1",
+    "q": "What should I do first if I accidentally published my API key on GitHub?",
+    "issue": "overly_long_answer",
+    "answer": "The first thing you should do is **revoke the exposed key** immediately. That stops anyone who found it from using it to make calls to your Acme Cloud services. Once the key is revoked, you can:\n\n1. **Create a new API key** (the replacement key) and "
+  },
+  {
+    "v": "v1",
+    "q": "What should I do first if I accidentally published my API key on GitHub?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The first thing you should do is **revoke the exposed key** immediately. That stops anyone who found it from using it to make calls to your Acme Cloud services. Once the key is revoked, you can:\n\n1. **Create a new API key** (the replacement key) and "
+  },
+  {
+    "v": "v1",
+    "q": "What exponential backoff sequence is recommended after an HTTP 429?",
+    "issue": "overly_long_answer",
+    "answer": "For an HTTP 429 (Too Many Requests) you should back‑off using an exponential sequence and add a bit of randomness so many clients don’t line up at the same retry time.\n\n**Recommended retry intervals**\n\n| Attempt | Delay (seconds) | Notes |\n|---------"
+  },
+  {
+    "v": "v1",
+    "q": "What exponential backoff sequence is recommended after an HTTP 429?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "For an HTTP 429 (Too Many Requests) you should back‑off using an exponential sequence and add a bit of randomness so many clients don’t line up at the same retry time.\n\n**Recommended retry intervals**\n\n| Attempt | Delay (seconds) | Notes |\n|---------"
+  },
+  {
+    "v": "v1",
+    "q": "What is the maximum retry interval when backing off?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The maximum retry interval is **60 seconds** when you’re using exponential back‑off for Acme Cloud API calls."
+  },
+  {
+    "v": "v1",
+    "q": "Which MFA methods does ACME Cloud support?",
+    "issue": "overly_long_answer",
+    "answer": "ACME Cloud supports the following MFA (Multi‑Factor Authentication) methods:\n\n| MFA Method | What it is | Typical use |\n|------------|------------|-------------|\n| **Authenticator applications** | Apps such as Google Authenticator, Microsoft Authenti"
+  },
+  {
+    "v": "v1",
+    "q": "Which MFA methods does ACME Cloud support?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "ACME Cloud supports the following MFA (Multi‑Factor Authentication) methods:\n\n| MFA Method | What it is | Typical use |\n|------------|------------|-------------|\n| **Authenticator applications** | Apps such as Google Authenticator, Microsoft Authenti"
+  },
+  {
+    "v": "v1",
+    "q": "How many compute instances can a project have by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "By default, a single project is allowed up to **100 compute instances**."
+  },
+  {
+    "v": "v1",
+    "q": "Who is allowed to transfer project ownership?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "Only **organization administrators** can transfer project ownership."
+  },
+  {
+    "v": "v1",
+    "q": "How long does a project ownership transfer normally take?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "A transfer of project ownership typically completes within **five minutes**. If you don’t see the change reflected within that time, double‑check that all the required steps (destination admin selection, MFA re‑auth, and project‑ID confirmation) were"
+  },
+  {
+    "v": "v1",
+    "q": "What does AI-503 mean, and when should I contact support about it?",
+    "issue": "overly_long_answer",
+    "answer": "**What AI‑503 means**\n\n- **AI‑503** is a status code that Acme Cloud returns when an AI model or service is **temporarily unavailable**.  \n- The service is down for a short period (usually a few seconds to a few minutes) and is expected to recover au"
+  },
+  {
+    "v": "v1",
+    "q": "What does AI-503 mean, and when should I contact support about it?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "**What AI‑503 means**\n\n- **AI‑503** is a status code that Acme Cloud returns when an AI model or service is **temporarily unavailable**.  \n- The service is down for a short period (usually a few seconds to a few minutes) and is expected to recover au"
+  },
+  {
+    "v": "v1",
+    "q": "How many AI requests per minute are allowed by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "By default, Acme Cloud allows **120 AI requests per minute** per organization. This is the synthetic default limit you’ll see in the dashboard’s quota overview. If you need more, you can request a quota increase."
+  },
+  {
+    "v": "v1",
+    "q": "Why am I still being charged after stopping my VM?",
+    "issue": "overly_long_answer",
+    "answer": "When you stop a VM, the compute engine stops billing for the **running instance**.  \nHowever, several other resources that are attached to or associated with that VM can keep generating charges. Here’s a quick checklist to help you see what might sti"
+  },
+  {
+    "v": "v1",
+    "q": "Why am I still being charged after stopping my VM?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "When you stop a VM, the compute engine stops billing for the **running instance**.  \nHowever, several other resources that are attached to or associated with that VM can keep generating charges. Here’s a quick checklist to help you see what might sti"
+  },
+  {
+    "v": "v1",
+    "q": "What response time target does a P1 ticket have?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "For a P1 (Critical) ticket, the target response time is **15 minutes**. This means our support team should acknowledge and start working on the issue within 15 minutes of the ticket being logged."
+  },
+  {
+    "v": "v1",
+    "q": "What CPU usage level should trigger an investigation?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "According to Acme Cloud’s monitoring guidance, you should start an investigation when **CPU usage stays above 90 % for more than 15 minutes**. This threshold signals that a process or workload is consuming a disproportionate amount of CPU resources a"
+  },
+  {
+    "v": "v1",
+    "q": "What does a database connection timeout usually indicate?",
+    "issue": "overly_long_answer",
+    "answer": "A database‑connection timeout usually means the client couldn’t establish a network connection to the database server at all.  \nIn other words, the network path (routing, firewall rules, security groups, port accessibility, etc.) is blocking or dropp"
+  },
+  {
+    "v": "v1",
+    "q": "What does a database connection timeout usually indicate?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "A database‑connection timeout usually means the client couldn’t establish a network connection to the database server at all.  \nIn other words, the network path (routing, firewall rules, security groups, port accessibility, etc.) is blocking or dropp"
+  },
+  {
+    "v": "v1",
+    "q": "What case must bucket names use?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "Bucket names must be in **lowercase**. All characters in a bucket name must be lowercase letters; no uppercase letters are allowed."
+  },
+  {
+    "v": "v1",
+    "q": "Why can increasing top-k make RAG answers worse?",
+    "issue": "overly_long_answer",
+    "answer": "Increasing top‑k — i.e., asking the retriever to return more documents for each query — might sound like a good idea, but it can actually hurt the quality of RAG (Retrieval‑Augmented Generation) answers. Here’s why:\n\n| Why larger top‑k can degrade RA"
+  },
+  {
+    "v": "v1",
+    "q": "Why can increasing top-k make RAG answers worse?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "Increasing top‑k — i.e., asking the retriever to return more documents for each query — might sound like a good idea, but it can actually hurt the quality of RAG (Retrieval‑Augmented Generation) answers. Here’s why:\n\n| Why larger top‑k can degrade RA"
+  },
+  {
+    "v": "v1",
+    "q": "What is the difference between HTTP 403 and HTTP 401?",
+    "issue": "overly_long_answer",
+    "answer": "### HTTP 401 – Unauthorized  \n| What it means | Typical cause | Typical response |\n|----------------|--------------|------------------|\n| **Authentication failed or not provided** | • No credentials in the request.<br>• Credentials are present but ar"
+  },
+  {
+    "v": "v1",
+    "q": "What is the difference between HTTP 403 and HTTP 401?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "### HTTP 401 – Unauthorized  \n| What it means | Typical cause | Typical response |\n|----------------|--------------|------------------|\n| **Authentication failed or not provided** | • No credentials in the request.<br>• Credentials are present but ar"
+  },
+  {
+    "v": "v1",
+    "q": "How many users can an organization have by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "By default, an organization can have **500 users**."
+  },
+  {
+    "v": "v1",
+    "q": "If versioning is on and I delete an object, can I get it back?",
+    "issue": "overly_long_answer",
+    "answer": "Yes—if bucket versioning is **enabled** and you delete a visible object, the *previous* (or “current”) version is still stored in the bucket. You can recover it, but you’ll need to retrieve the specific version that you want to restore. Here’s how to"
+  },
+  {
+    "v": "v1",
+    "q": "If versioning is on and I delete an object, can I get it back?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "Yes—if bucket versioning is **enabled** and you delete a visible object, the *previous* (or “current”) version is still stored in the bucket. You can recover it, but you’ll need to retrieve the specific version that you want to restore. Here’s how to"
+  },
+  {
+    "v": "v1",
+    "q": "Do you offer an Android mobile app?",
+    "issue": "hallucinated_answer",
+    "answer": "I’m sorry, but at the moment Acme Cloud does not provide a dedicated Android mobile app. All of our services are accessible through the web portal and the REST APIs, which you can call from any platform—including Android—using standard HTTP libraries"
+  },
+  {
+    "v": "v1",
+    "q": "Do you offer an Android mobile app?",
+    "issue": "overly_long_answer",
+    "answer": "I’m sorry, but at the moment Acme Cloud does not provide a dedicated Android mobile app. All of our services are accessible through the web portal and the REST APIs, which you can call from any platform—including Android—using standard HTTP libraries"
+  },
+  {
+    "v": "v1",
+    "q": "What is the hourly price of a C-Series compute instance?",
+    "issue": "overly_long_answer",
+    "answer": "I’m sorry, but I don’t have the current hourly price for a C‑Series compute instance in my knowledge base. The pricing can vary by region, instance size, and any active discounts or promotions.\n\nYou can find the most up‑to‑date hourly rates on Acme C"
+  },
+  {
+    "v": "v1",
+    "q": "Can I pay with cryptocurrency?",
+    "issue": "hallucinated_answer",
+    "answer": "I’m sorry, but Acme Cloud currently does not accept cryptocurrency as a payment method. We support the following payment options:\n\n| Method | Details |\n|--------|---------|\n| **Credit/Debit Card** | Visa, Mastercard, American Express, etc. |\n| **Bank"
+  },
+  {
+    "v": "v1",
+    "q": "Can I pay with cryptocurrency?",
+    "issue": "overly_long_answer",
+    "answer": "I’m sorry, but Acme Cloud currently does not accept cryptocurrency as a payment method. We support the following payment options:\n\n| Method | Details |\n|--------|---------|\n| **Credit/Debit Card** | Visa, Mastercard, American Express, etc. |\n| **Bank"
+  },
+  {
+    "v": "v1",
+    "q": "Can I pay with cryptocurrency?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "I’m sorry, but Acme Cloud currently does not accept cryptocurrency as a payment method. We support the following payment options:\n\n| Method | Details |\n|--------|---------|\n| **Credit/Debit Card** | Visa, Mastercard, American Express, etc. |\n| **Bank"
+  },
+  {
+    "v": "v1",
+    "q": "Do you have an office in Berlin?",
+    "issue": "hallucinated_answer",
+    "answer": "I’m afraid Acme Cloud doesn’t have a physical office in Berlin. All of our support and services are delivered through the cloud, but we do have regional support teams that can assist customers in Europe if needed. If you need any help or have a speci"
+  },
+  {
+    "v": "v1",
+    "q": "What is your uptime SLA percentage?",
+    "issue": "hallucinated_answer",
+    "answer": "I’m glad you’re checking in about uptime. Our SLA guarantees vary by product tier and region, so the exact percentage depends on the specific service you’re using. In general, most Acme Cloud services are backed by a **99.9 %** uptime SLA (four nines"
+  },
+  {
+    "v": "v1",
+    "q": "What is your uptime SLA percentage?",
+    "issue": "overly_long_answer",
+    "answer": "I’m glad you’re checking in about uptime. Our SLA guarantees vary by product tier and region, so the exact percentage depends on the specific service you’re using. In general, most Acme Cloud services are backed by a **99.9 %** uptime SLA (four nines"
+  },
+  {
+    "v": "v1",
+    "q": "What is your uptime SLA percentage?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "I’m glad you’re checking in about uptime. Our SLA guarantees vary by product tier and region, so the exact percentage depends on the specific service you’re using. In general, most Acme Cloud services are backed by a **99.9 %** uptime SLA (four nines"
+  },
+  {
+    "v": "v1",
+    "q": "Is there a student discount?",
+    "issue": "hallucinated_answer",
+    "answer": "Yes! Acme Cloud offers a **Student Discount Program** that gives eligible students a special rate on all standard services. Here’s how it works:\n\n| Program | Eligibility | Discount | How to Apply |\n|---------|-------------|----------|--------------|\n"
+  },
+  {
+    "v": "v1",
+    "q": "Is there a student discount?",
+    "issue": "overly_long_answer",
+    "answer": "Yes! Acme Cloud offers a **Student Discount Program** that gives eligible students a special rate on all standard services. Here’s how it works:\n\n| Program | Eligibility | Discount | How to Apply |\n|---------|-------------|----------|--------------|\n"
+  },
+  {
+    "v": "v1",
+    "q": "Is there a student discount?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "Yes! Acme Cloud offers a **Student Discount Program** that gives eligible students a special rate on all standard services. Here’s how it works:\n\n| Program | Eligibility | Discount | How to Apply |\n|---------|-------------|----------|--------------|\n"
+  },
+  {
+    "v": "v2",
+    "q": "How long is an account locked after repeated failed logins?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The account is locked for **30 minutes** after repeated authentication failures."
+  },
+  {
+    "v": "v2",
+    "q": "What is the default limit for API requests per minute?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The default limit for API requests per minute is **1,000** (see “Default Service Limits” in the Acme Cloud documentation)."
+  },
+  {
+    "v": "v2",
+    "q": "What is the maximum size of a single object in object storage?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The maximum size of a single object in Acme Object Storage is **5 TB**."
+  },
+  {
+    "v": "v2",
+    "q": "What should I do first if I accidentally published my API key on GitHub?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "First, immediately revoke the exposed key. The recommended procedure starts with: **“Revoke the exposed key.”**"
+  },
+  {
+    "v": "v2",
+    "q": "What is the maximum retry interval when backing off?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The maximum retry interval is **60 seconds**."
+  },
+  {
+    "v": "v2",
+    "q": "How many compute instances can a project have by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The default limit is **100** compute instances per project."
+  },
+  {
+    "v": "v2",
+    "q": "How many AI requests per minute are allowed by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The default limit is **120 AI requests per minute**."
+  },
+  {
+    "v": "v2",
+    "q": "Why am I still being charged after stopping my VM?",
+    "issue": "false_refusal",
+    "answer": "I don't have that information, let me connect you with a human agent."
+  },
+  {
+    "v": "v2",
+    "q": "What response time target does a P1 ticket have?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "P1 tickets have a response time target of **15 minutes**."
+  },
+  {
+    "v": "v2",
+    "q": "What CPU usage level should trigger an investigation?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "If CPU usage exceeds **90 percent for more than 15 minutes**, investigate the process consuming CPU."
+  },
+  {
+    "v": "v2",
+    "q": "What is the difference between HTTP 403 and HTTP 401?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "HTTP 403 means the credentials were accepted but the authenticated identity does **not** have permission to perform the requested action.  \nHTTP 401 means the authentication credentials themselves are **invalid** or missing."
+  },
+  {
+    "v": "v2",
+    "q": "How many users can an organization have by default?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "The default limit for users per organization is **500**."
+  },
+  {
+    "v": "v2",
+    "q": "If versioning is on and I delete an object, can I get it back?",
+    "issue": "markdown_in_plain_text_chat",
+    "answer": "If bucket versioning is enabled, deleting the visible object does not necessarily remove all stored versions (see section **5.3 Unexpected Storage Charge**). The previous object version may still be recoverable, but recovery depends on the available "
+  }
+]
